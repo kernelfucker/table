@@ -7,7 +7,7 @@
 
 #include "tui.h"
 
-#define max_items 20
+#define max_items 35
 
 static Information packet[max_items];
 static int pt_index = 0;
