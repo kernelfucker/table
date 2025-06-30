@@ -3,11 +3,13 @@
 #include <string.h>
 #include <unistd.h>
 #include <time.h>
+#include <sys/time.h>
 #include <sys/ioctl.h>
 
 #include "tui.h"
 
 #define max_items 30
+#define max_fr 30
 
 static Information packet[max_items];
 static int pt_index = 0;
@@ -33,9 +35,22 @@ void updt_tui(Information *info){
 }
 
 void draw_tui(){
+	static struct timeval last_dt = {0};
+	struct timeval now;
+	gettimeofday(&now, NULL);
+	long e = (now.tv_sec = last_dt.tv_sec) * 1000000 + (now.tv_usec - last_dt.tv_usec);
+	if(e < (1000000 / max_fr)) return;
+	last_dt = now;
+	static time_t last_tor_ck = 0;
+	time_t currtm = time(NULL);
+	if(currtm - last_tor_ck >= 1){
+		tor_active = is_tor_active();
+		last_tor_ck = currtm;
+	}
+
 	struct winsize w;
 	ioctl(STDOUT_FILENO, TIOCGWINSZ, &w);
-	clear();
+	printf("\033[H\033[J");
 	printf("table %s | ", version);
 	printf("tor: %s", tor_active ? "active" : "inactive");
 	printf("\n");
