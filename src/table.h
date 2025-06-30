@@ -1,8 +1,6 @@
 #ifndef table_h
 #define table_h
 
-/* test */
-
 #define version "0.2"
 
 typedef struct{
