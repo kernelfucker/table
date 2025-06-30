@@ -139,6 +139,40 @@ int is_tor_active(){
 	return 0;
 }
 
+int is_sshd_active(){
+	FILE *f;
+	char path[256];
+	f = popen("pgrep -x sshd", "r");
+	if(f == NULL){
+		return 0;
+	}
+
+	if(fgets(path, sizeof(path), f) != NULL){
+		pclose(f);
+		return 1;
+	}
+
+	pclose(f);
+	return 0;
+}
+
+int is_ftpd_active(){
+	FILE *f;
+	char path[256];
+	f = popen("pgrep -x ftpd", "r");
+	if(f == NULL){
+		return 0;
+	}
+
+	if(fgets(path, sizeof(path), f) != NULL){
+		pclose(f);
+		return 1;
+	}
+
+	pclose(f);
+	return 0;
+}
+
 void help(){
 	printf("table - network analyzer\n");
 	printf("usage: table [options]..\n");
