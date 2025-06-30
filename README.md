@@ -21,4 +21,4 @@ $ make install
 **this project is just finished, report if there are any problems**
 
 # example
-![image](https://github.com/user-attachments/assets/06e11c98-d63d-446a-8b94-f89e63a1810e)
+![image](https://github.com/user-attachments/assets/5ae1e04f-9624-400f-ac27-fb2f5ada66e6)
