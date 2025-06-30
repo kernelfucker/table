@@ -96,7 +96,7 @@ void start_analysis(const char *in, int tapping){
 	}
 
 	if(pcap_compile(handle, &fp, filter_exp, 0, mask) == -1){
-		printf(stderr, "couldnt parse filter %s: %s\n", filter_exp, pcap_geterr(handle));
+		fprintf(stderr, "couldnt parse filter %s: %s\n", filter_exp, pcap_geterr(handle));
 		pcap_close(handle);
 		return;
 	}
