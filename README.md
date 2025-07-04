@@ -13,8 +13,8 @@ $ make install
 
 # options
 ```
-  --interface   specify network to analysis
-  --tapping     enable tapping mode
+  -i    specify network to analysis
+  -t    enable tapping mode
 ```
 
 # note
