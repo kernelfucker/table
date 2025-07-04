@@ -7,9 +7,9 @@ $ make
 $ make install
 
 # usage
-\# ./table --interface eth0 --tapping
+\# ./table -i eth0 -t
 
-\# ./table --interface eth0
+\# ./table -i eth0
 
 # options
 ```
