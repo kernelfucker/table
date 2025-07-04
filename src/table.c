@@ -174,17 +174,16 @@ int is_ftpd_active(){
 }
 
 void help(){
-	printf("table - network analyzer\n");
 	printf("usage: table [options]..\n");
 	printf("options:\n");
-	printf("  --interface	specify network to analysis\n");
-	printf("  --tapping	enable tapping mode\n");
-	printf("  --version	show version information\n");
-	printf("  --help	display this\n");
+	printf("  -i	specify network to analysis\n");
+	printf("  -t	enable tapping mode\n");
+	printf("  -v	show version information\n");
+	printf("  -h	display this\n");
 }
 
 void show_version(){
-	printf("%s\n", version);
+	printf("table-%s\n", version);
 }
 
 int main(int argc, char *argv[]){
@@ -193,29 +192,27 @@ int main(int argc, char *argv[]){
 	int opts;
 	int lnidx = 0;
 	static struct option lnopts[] = {
-		{"help", no_argument, 0, 1},
-		{"version", no_argument, 0, 2},
-		{"interface", required_argument, 0, 0},
-		{"tapping", no_argument, 0, 0},
+		{"h", no_argument, 0, 'h'},
+		{"v", no_argument, 0, 'v'},
+		{"i", required_argument, 0, 'i'},
+		{"t", no_argument, 0, 't'},
 		{0, 0, 0, 0}
 	};
 
-	while((opts = getopt_long(argc, argv, "", lnopts, &lnidx)) != -1){
+	while((opts = getopt_long(argc, argv, "hvi:t", lnopts, &lnidx)) != -1){
 		switch(opts){
-			case 0:
-				if(strcmp(lnopts[lnidx].name, "interface") == 0){
-					in = optarg;
-				} else if(strcmp(lnopts[lnidx].name, "tapping") == 0){
-					tapping = 1;
-				}
-
-				break;
-			case 1:
+			case 'h':
 				help();
 				return 0;
-			case 2:
+			case 'v':
 				show_version();
 				return 0;
+			case 'i':
+				in = optarg;
+				break;
+			case 't':
+				tapping = 1;
+				break;
 			default:
 				help();
 				return 1;
@@ -223,7 +220,7 @@ int main(int argc, char *argv[]){
 	}
 
 	if(in == NULL){
-		fprintf(stderr, "no interface specified, use --interface\n");
+		fprintf(stderr, "no interface specified, use -i\n");
 		help();
 		return 1;
 	}

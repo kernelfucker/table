@@ -1,7 +1,7 @@
 #ifndef table_h
 #define table_h
 
-#define version "0.4"
+#define version "0.5"
 
 typedef struct{
 	char source_ip[16];
